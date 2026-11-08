@@ -1,0 +1,10 @@
+# 发布到 GitHub 时追加
+.workbuddy/
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+__pycache__/
+*.pyc
+*.log
+.env.local

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q版山地速降单车</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+    <!-- Main Menu -->
+    <div id="main-menu" class="ui-overlay">
+      <div class="menu-card">
+        <h1 class="game-title">Q版山地速降单车</h1>
+        <p class="game-subtitle">轻松解压 · 萌系竞速</p>
+        <button class="menu-btn" data-action="time-trial">计时竞速</button>
+        <button class="menu-btn" data-action="free-ride">自由滑行</button>
+        <button class="menu-btn" data-action="how-to-play">操作说明</button>
+      </div>
+    </div>
+    <!-- Track Select -->
+    <div id="track-select" class="ui-overlay hidden">
+      <div class="menu-card">
+        <h2 class="select-title">选择赛道</h2>
+        <div class="track-cards">
+          <div class="track-card" data-track="0">
+            <div class="track-icon">forest</div>
+            <div class="track-name">山林穿行</div>
+            <div class="track-diff">难度：简单</div>
+          </div>
+          <div class="track-card" data-track="1">
+            <div class="track-icon">grass</div>
+            <div class="track-name">草地飞驰</div>
+            <div class="track-diff">难度：中等</div>
+          </div>
+          <div class="track-card" data-track="2">
+            <div class="track-icon">rock</div>
+            <div class="track-name">浅岩坡道</div>
+            <div class="track-diff">难度：较难</div>
+          </div>
+        </div>
+        <button class="menu-btn back-btn" data-action="back-to-menu">返回</button>
+      </div>
+    </div>
+    <!-- How to Play -->
+    <div id="how-to-play" class="ui-overlay hidden">
+      <div class="menu-card help-card">
+        <h2 class="select-title">操作说明</h2>
+        <div class="help-grid">
+          <div class="help-row"><span class="key">W</span><span>加速踩踏 / 下坡自动增速</span></div>
+          <div class="help-row"><span class="key">S</span><span>减速刹车 / 空中下压稳定</span></div>
+          <div class="help-row"><span class="key">A / D</span><span>左右转向 / 空中调整姿态</span></div>
+          <div class="help-row"><span class="key">Space</span><span>起跳 / 长按蓄力高跳</span></div>
+          <div class="help-row"><span class="key">C</span><span>切换第一/第三人称视角</span></div>
+          <div class="help-row"><span class="key">R</span><span>重置至最近存档点</span></div>
+          <div class="help-row"><span class="key">ESC</span><span>暂停游戏</span></div>
+          <div class="help-row"><span class="key">Mouse</span><span>调整视角</span></div>
+        </div>
+        <button class="menu-btn" data-action="back-to-menu">返回</button>
+      </div>
+    </div>
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="hud-timer">
+          <span class="hud-label">时间</span>
+          <span id="hud-time">00:00.00</span>
+        </div>
+        <div class="hud-score">
+          <span class="hud-label">特技分</span>
+          <span id="hud-score">0</span>
+        </div>
+        <button id="pause-btn" class="hud-btn">II</button>
+      </div>
+      <div class="hud-bottom">
+        <div class="hud-speed">
+          <div class="speed-bar-bg"><div id="speed-bar" class="speed-bar-fill"></div></div>
+          <span id="hud-speed">0 km/h</span>
+        </div>
+        <div class="hud-trick" id="hud-trick-text"></div>
+      </div>
+    </div>
+    <!-- Pause Menu -->
+    <div id="pause-menu" class="ui-overlay hidden">
+      <div class="menu-card">
+        <h2 class="select-title">暂停</h2>
+        <button class="menu-btn" data-action="resume">继续</button>
+        <button class="menu-btn" data-action="restart">重新开始</button>
+        <button class="menu-btn" data-action="quit-to-menu">返回主菜单</button>
+      </div>
+    </div>
+    <!-- Results -->
+    <div id="results-screen" class="ui-overlay hidden">
+      <div class="menu-card results-card">
+        <h2 class="select-title" id="results-title">通关！</h2>
+        <div class="results-row"><span>通关时间</span><span id="results-time">00:00.00</span></div>
+        <div class="results-row"><span>特技得分</span><span id="results-score">0</span></div>
+        <div class="results-row" id="best-time-row"><span>最佳纪录</span><span id="results-best">00:00.00</span></div>
+        <div class="results-row" id="new-record-row" style="display:none"><span class="new-record">新纪录！</span></div>
+        <button class="menu-btn" data-action="restart">再来一次</button>
+        <button class="menu-btn" data-action="quit-to-menu">返回主菜单</button>
+      </div>
+    </div>
+    <!-- Countdown -->
+    <div id="countdown" class="countdown hidden"><span id="countdown-text">3</span></div>
+    <!-- Loading -->
+    <div id="loading-screen" class="ui-overlay">
+      <div class="loading-content">
+        <div class="loading-bike"></div>
+        <p class="loading-text">正在加载赛道...</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
